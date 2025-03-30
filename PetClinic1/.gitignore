@@ -1,0 +1,36 @@
+# Ignore build output
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore ASP.NET temp files
+.vs/
+.idea/
+
+# Ignore logs
+*.log
+
+# Ignore secrets and local configs
+appsettings.json
+appsettings.Development.json
+
+# Ignore published output
+publish/
+*.publishsettings
+
+# Ignore coverage/test results
+TestResults/
+*.coverage
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore Rider and VS Code settings
+.vscode/
+*.code-workspace
