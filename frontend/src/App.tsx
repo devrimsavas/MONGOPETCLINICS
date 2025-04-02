@@ -1,17 +1,20 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NavBar from "./Components/NavBar";
+import HomePage from "./Components/HomePage";
+import AdminPage from "./Components/AdminPage";
 
-import "./app.css";
-import PetTable  from  "./Components/PetTable";
-
+import "./App.css";
 
 function App() {
-  
   return (
-    <>
-    <h1>PET HOSPITAL</h1>   
-    <PetTable/>
-      
-    </>
-  )
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/admin" element={<AdminPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
