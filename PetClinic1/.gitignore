@@ -34,3 +34,5 @@ Thumbs.db
 # Ignore Rider and VS Code settings
 .vscode/
 *.code-workspace
+
+/frontend/

@@ -16,6 +16,8 @@ namespace PetClinic1.Models
         [Required]
         public string? Name { get; set; }
 
+        public string? PhotoUrl {get;set;}="none";
+
         [Required]
         public string? Species { get; set; }
 
