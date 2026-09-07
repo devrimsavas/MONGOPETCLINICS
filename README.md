@@ -1,67 +1,93 @@
-# Mongo Pet Hospital API
+# Mongo Pet Clinic
 
-This project is a backend web application built with ASP.NET Core Minimal APIs and MongoDB.
-It simulates a Pet Clinic / Hospital Management System, allowing CRUD operations on pets, their owners, vaccinations, and medical history.
+A full-stack pet clinic management system with an ASP.NET Core Minimal API backend backed by MongoDB Atlas, and a React + TypeScript admin frontend.
 
 ## 🚀 Features
 
-CRUD operations for pet records
+- **Pet Records** — full CRUD on pet profiles, including species, breed, age, color, and photo URL
+- **Owner Information** — each pet is linked to an owner with contact details
+- **Vaccination Tracking** — list all vaccinated pets, with vaccine name and administration date
+- **Medical History** — store visit reason, treatment, and prescription entries per pet
+- **Search & Filter** — find pets by owner name or species
+- **Admin Panel** — React frontend with a searchable pet table and navigation between Home and Admin views
+- **Swagger/OpenAPI** — interactive API documentation with XML comments
 
-Owner-based queries – fetch all pets by a specific owner
+## 🛠 Tech Stack
 
-Species-based queries – list pets by species
+### Backend
+- ASP.NET Core 9 **Minimal API**
+- **MongoDB** (Atlas cloud-hosted) via the official MongoDB.Bson driver
+- CORS enabled (AllowAll policy) for development
+- Swashbuckle (Swagger UI) with XML documentation
 
-Vaccination tracking – fetch vaccinated pets
+### Frontend
+- **React 19** + **TypeScript**
+- **Vite** for build tooling
+- **react-router-dom** for navigation (Home / Admin routes)
 
-Medical history entries for each pet
+## 📂 Project Structure
 
-Swagger/OpenAPI 3.0 integration for API documentation
+```
+MONGOPETCLINICS/
+├── PetClinic1/              # ASP.NET Core backend
+│   ├── Models/               # Pet, Owner, Contact, VaccinationRecord, MedicalHistoryEntry
+│   ├── Services/             # MongoDbService (data access layer)
+│   └── Program.cs            # Minimal API endpoint definitions
+└── frontend/                 # React + TypeScript admin UI
+    └── src/Components/       # HomePage, AdminPage, PetTable, SearchBar, NavBar, Button
+```
 
-## 📂 Models
+## 📖 API Endpoints
 
-Pet → stores core pet information (name, species, vaccination records, medical history)
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/` | Health check |
+| GET | `/pets` | Get all pets |
+| POST | `/pets` | Add a new pet |
+| PUT | `/pets` | Update a pet by name + owner |
+| DELETE | `/pets` | Delete a pet by name + owner |
+| GET | `/pets/by-owner/{ownerName}` | Get all pets for a specific owner |
+| GET | `/pets/by-species/{species}` | Get all pets of a given species |
+| GET | `/pets/vaccinated` | Get all vaccinated pets |
 
-Owner → stores owner details (name, contact)
+Full interactive documentation is available via Swagger UI when running the backend in development mode.
 
-Contact → owner’s contact information
+## ▶️ Getting Started
 
-VaccinationRecord → vaccination type, date
+### Prerequisites
+- .NET 9 SDK
+- Node.js (for the frontend)
+- A MongoDB Atlas cluster (or local MongoDB instance)
 
-MedicalHistoryEntry → previous treatments and visits
+### Backend Setup
 
-📖 API Endpoints
-Method Endpoint Description
-GET / Health check
-GET /pets Get all pets
-POST /pets Add new pet
-PUT /pets Update pet by name + owner
-DELETE /pets Delete pet by name + owner
-GET /pets/by-owner/{owner} Get pets by owner
-GET /pets/by-species/{type} Get pets by species
-GET /pets/vaccinated Get all vaccinated pets
+1. Navigate to the backend folder:
+   ```bash
+   cd PetClinic1
+   ```
+2. Copy `appsettings-sample.txt` to `appsettings.json` and fill in your MongoDB connection string:
+   ```json
+   "MongoDB": {
+     "ConnectionString": "<your-atlas-connection>",
+     "DatabaseName": "pethospital1"
+   }
+   ```
+3. Run the API:
+   ```bash
+   dotnet run
+   ```
+4. Open Swagger UI at the URL shown in the console (typically `http://localhost:5120/swagger`)
 
-## 👉 Full documentation available at:
+### Frontend Setup
 
-http://localhost:5120/swagger/index.html
+1. Navigate to the frontend folder:
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+2. The app runs on Vite's default port and connects to the backend at `http://localhost:5120`
 
-⚙️ Setup & Run
-Prerequisites
+## 📝 Notes
 
-.NET 6 SDK
-
-MongoDB (local or cloud, e.g. Atlas)
-
-Run
-dotnet build
-dotnet run
-
-Swagger UI will be available at:
-👉 http://localhost:5120/swagger/index.html
-
-📝 Notes
-
-CORS enabled (AllowAll policy) for development purposes.
-
-Data persistence handled via MongoDbService.
-
-This is a learning project to practice ASP.NET Core Minimal APIs and MongoDB integration.
+This is a learning project built to practice ASP.NET Core Minimal APIs, MongoDB integration with a document-based data model (nested owner, vaccination, and medical history records), and connecting a React/TypeScript frontend to a .NET backend.
